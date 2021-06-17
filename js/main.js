@@ -25,6 +25,25 @@ function toDataUrl(url, callback) {
     xhr.send();
 }
 
+function errorToast(errorMessage)
+{
+    var toast = document.createElement("div");
+    toast.style.position = "absolute";
+    toast.style.top = "10px";
+    toast.style.right = "10px";
+    toast.style.backgroundColor = "#dc3545";
+    toast.style.color = "white";
+    toast.style.padding = "10px";
+    toast.innerText = errorMessage;
+
+    document.body.appendChild(toast);
+
+    setTimeout(function(){
+        toast.remove();
+    }, 1000);
+
+}
+
 
 
 fetchDataButton.addEventListener("click", function(event){
@@ -34,7 +53,7 @@ fetchDataButton.addEventListener("click", function(event){
 
     if(givenUsername === "" || givenUsername === " " || givenUsername == "" || givenUsername == " ")
     {
-        alert("Username field is empty!");
+        errorToast("Username field is empty!");
         return false;
     }
 
@@ -66,7 +85,7 @@ fetchDataButton.addEventListener("click", function(event){
 
             }else if(data.status === "error")
             {
-                alert(data.result);
+                errorToast(data.result);
             }
         });
 });
