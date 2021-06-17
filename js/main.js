@@ -11,6 +11,10 @@ var content = document.querySelector("#tweet .content p");
 var tweet = document.getElementById("tweet");
 var download = document.getElementById("downloadURL");
 
+var retweets = document.getElementById("retweets");
+var quoteTweets = document.getElementById("quoteTweets");
+var likes = document.getElementById("likes");
+
 function toDataUrl(url, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
@@ -98,6 +102,57 @@ content.addEventListener('blur', function(){
         .replace(/(https?:\/\/[\w\.\/]+)/, '<span>$1</span>')
         .replace(/\n/g, '<br />');
     content.innerHTML = tweet;
+});
+
+retweets.addEventListener('blur', function() {
+    var number = parseInt(retweets.innerText);
+    var isNumber = Number.isInteger(number);
+    
+    if(isNumber)
+    {
+        if(number >= 10000 && number < 1000000)
+        {
+            retweets.innerText = (number / 1000) + "K";
+        }else if(number >= 1000000)
+        {
+            retweets.innerText = (number / 1000000) + "M";
+        }
+    }
+
+});
+
+quoteTweets.addEventListener('blur', function() {
+    var number = parseInt(quoteTweets.innerText);
+    var isNumber = Number.isInteger(number);
+
+    if(isNumber)
+    {
+        if(number >= 10000 && number < 1000000)
+        {
+            quoteTweets.innerText = (number / 1000) + "K";
+        }else if(number >= 1000000)
+        {
+            quoteTweets.innerText = (number / 1000000) + "M";
+        } 
+    }
+
+});
+
+likes.addEventListener('blur', function() {
+    var number = parseInt(likes.innerText);
+    var isNumber = Number.isInteger(number);
+
+    if(isNumber)
+    {
+        if(number >= 10000 && number < 1000000)
+        {
+            likes.innerText = (number / 1000) + "K";
+        }else if(number >= 1000000)
+        {
+            likes.innerText = (number / 1000000) + "M";
+        } 
+    }
+
 });
 
 
