@@ -14,6 +14,7 @@ var download = document.getElementById("downloadURL");
 var retweets = document.getElementById("retweets");
 var quoteTweets = document.getElementById("quoteTweets");
 var likes = document.getElementById("likes");
+var fileInput = document.querySelector("input[name='displayImageInput']");
 
 function toDataUrl(url, callback) {
     var xhr = new XMLHttpRequest();
@@ -107,15 +108,17 @@ content.addEventListener('blur', function(){
 retweets.addEventListener('blur', function() {
     var number = parseInt(retweets.innerText);
     var isNumber = Number.isInteger(number);
-    
     if(isNumber)
     {
-        if(number >= 10000 && number < 1000000)
+        if(number > 0 && number < 10000)
         {
-            retweets.innerText = (number / 1000) + "K";
+            retweets.innerText = new Intl.NumberFormat('en-IN').format(number);
+        }else if(number >= 10000 && number < 1000000)
+        {
+            retweets.innerText = new Intl.NumberFormat('en-IN').format(number / 1000) + "K";
         }else if(number >= 1000000)
         {
-            retweets.innerText = (number / 1000000) + "M";
+            retweets.innerText = new Intl.NumberFormat('en-IN').format(number / 1000000) + "M"
         }
     }
 
@@ -127,12 +130,15 @@ quoteTweets.addEventListener('blur', function() {
 
     if(isNumber)
     {
-        if(number >= 10000 && number < 1000000)
+        if(number > 0 && number < 10000)
         {
-            quoteTweets.innerText = (number / 1000) + "K";
+            quoteTweets.innerText = new Intl.NumberFormat("en-IN").format(number);
+        }else if(number >= 10000 && number < 1000000)
+        {
+            quoteTweets.innerText = new Intl.NumberFormat("en-IN").format(number/1000) + "K";
         }else if(number >= 1000000)
         {
-            quoteTweets.innerText = (number / 1000000) + "M";
+            quoteTweets.innerText = new Intl.NumberFormat("en-IN").format(number / 1000000) + "M";
         } 
     }
 
@@ -144,14 +150,40 @@ likes.addEventListener('blur', function() {
 
     if(isNumber)
     {
-        if(number >= 10000 && number < 1000000)
+        if(number > 0 && number < 10000)
         {
-            likes.innerText = (number / 1000) + "K";
+            likes.innerText = new Intl.NumberFormat("en-IN").format(number);
+        }else if(number >= 10000 && number < 1000000)
+        {
+            likes.innerText = new Intl.NumberFormat('en-IN').format(number / 1000) + "K";
         }else if(number >= 1000000)
         {
-            likes.innerText = (number / 1000000) + "M";
+            likes.innerText = new Intl.NumberFormat('en-IN').format(number / 1000000) + "M";
         } 
     }
+
+});
+
+userImg.addEventListener('click', function() {
+    fileInput.click();
+});
+
+fileInput.addEventListener('change', function() {
+    var file = fileInput.files[0];
+    var reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.onload = function()
+    {
+        userImg.src = reader.result;
+    }
+
+    reader.onerror = function(error)
+    {
+        errorToast("Error proccessing Image");
+    }
+
 
 });
 

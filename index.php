@@ -126,13 +126,13 @@
             </div>
             <div class="stats">
                 <span>
-                    <b contenteditable="true">0</b> Retweets
+                    <b id="retweets" contenteditable="true">0</b> Retweets
                 </span>
                 <span>
-                    <b contenteditable="true">0</b> Quote Tweets
+                    <b id="quoteTweets" contenteditable="true">0</b> Quote Tweets
                 </span>
                 <span>
-                    <b contenteditable="true">0</b> Likes
+                    <b id="likes" contenteditable="true">0</b> Likes
                 </span>
             </div>
             <div class="actions">
@@ -170,6 +170,7 @@
         <div class="text-center">
             <button class="btn" id="createTweet">Create Tweet</button>
             <div class="d-none">
+                <input type="file" name="displayImageInput">
                 <a id="downloadURL" class="d-none" href="" download="tweet.png"></a>
             </div>
             
